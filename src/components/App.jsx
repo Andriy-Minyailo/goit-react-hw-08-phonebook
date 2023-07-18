@@ -1,7 +1,7 @@
 import css from './App.module.css';
-import { FormAddContacts } from './FormAddContacts/FormAddContacts';
-import { Filter } from './Filter/Filter';
-import { ListContacts } from './ListContacts/ListContacts';
+// import { FormAddContacts } from './FormAddContacts/FormAddContacts';
+// import { Filter } from './Filter/Filter';
+// import { ListContacts } from './ListContacts/ListContacts';
 import { Header } from './Header/Header';
 import { Route, Routes } from 'react-router-dom';
 import { Home } from 'pages/Home';
