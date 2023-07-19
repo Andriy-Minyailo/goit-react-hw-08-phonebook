@@ -24,7 +24,7 @@ export const ListContacts = () => {
     <ul className={css.lists}>
       {isLoading && <p>Loading...</p>}
       {error && <p>Error: {error}</p>}
-      {contacts.map(({ id, contact: { name, number } }) => {
+      {contacts.map(({ id, name, number }) => {
         return <ElemListContact key={id} id={id} name={name} number={number} />;
       })}
     </ul>

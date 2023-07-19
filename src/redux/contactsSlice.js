@@ -30,6 +30,16 @@ export const contactsList = createSlice({
         };
       },
     },
+    editContact: {
+      reducer(state, { payload }) {
+        state.edit = payload;
+      },
+      prepare(contact) {
+        return {
+          payload: contact,
+        };
+      },
+    },
   },
 
   extraReducers: {
@@ -62,5 +72,5 @@ export const contactsList = createSlice({
   },
 });
 
-export const { filterValue } = contactsList.actions;
+export const { filterValue, editContact } = contactsList.actions;
 export const contactsReducer = contactsList.reducer;

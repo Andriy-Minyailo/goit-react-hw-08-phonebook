@@ -1,13 +1,13 @@
 import { useState } from 'react';
 import css from './FormAddContacts.module.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { nanoid } from '@reduxjs/toolkit';
 import { addContact } from '../../redux/operations';
 import { getContacts } from '../../redux/selectors';
 
 export const FormAddContacts = () => {
   const dispatch = useDispatch();
   const currentContacts = useSelector(getContacts);
+  console.log(currentContacts);
 
   const [state, setState] = useState({
     name: '',
@@ -20,28 +20,23 @@ export const FormAddContacts = () => {
 
   const submitAddContact = evt => {
     evt.preventDefault();
-    const { name, number } = evt.target.elements;
+    const { name: currentName, number: currentNumber } = evt.target.elements;
     if (!state.name.trim() || !state.number.trim()) {
       alert('Please enter the correct values');
       return;
     }
-    const newContact = {
-      id: nanoid(),
-      name: state.name,
-      number: state.number,
-    };
 
     const сheckRepetition = currentContacts.find(
-      ({ contact }) =>
-        contact.name.toLowerCase() === name.value.toLowerCase() ||
-        contact.number === number.value
+      ({ name, number }) =>
+        name.toLowerCase() === currentName.value.toLowerCase() ||
+        number === currentNumber.value
     );
 
     сheckRepetition
       ? alert(
-          `${name.value} or  number: ${number.value} is already in contacts.`
+          `${currentName.value} or  number: ${currentNumber.value} is already in contacts.`
         )
-      : dispatch(addContact(newContact));
+      : dispatch(addContact(state));
 
     setState({ name: '', number: '' });
   };
@@ -68,7 +63,7 @@ export const FormAddContacts = () => {
             className={css.input}
             type="tel"
             name="number"
-            pattern="^[0-9]+$"
+            // pattern="^[0-9]+$"
             title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
             required
             onChange={handleChange}

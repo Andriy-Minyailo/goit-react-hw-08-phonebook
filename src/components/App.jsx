@@ -8,8 +8,17 @@ import { Home } from 'pages/Home';
 import { Contacts } from 'pages/Contacts';
 import { Login } from 'pages/Login';
 import { RegisterUser } from 'pages/Register';
+import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+import { refreshCurrentUser } from 'redux/auth/operationsAuth';
 
 export const App = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(refreshCurrentUser());
+  }, [dispatch]);
+
   return (
     <div className={css.container}>
       <Header />
