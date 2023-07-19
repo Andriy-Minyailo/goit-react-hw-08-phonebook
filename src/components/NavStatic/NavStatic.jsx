@@ -4,7 +4,7 @@ export const NavStatic = () => {
   return (
     <>
       <nav>
-        <NavLink to="/">Home</NavLink>
+        <NavLink to="/">Home555</NavLink>
         <NavLink to="/contacts">Contacts</NavLink>
       </nav>
     </>

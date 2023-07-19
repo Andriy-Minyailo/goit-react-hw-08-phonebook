@@ -1,15 +1,29 @@
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { login } from 'redux/auth/operationsAuth';
 
 export const Login = () => {
-  const [login, setLogin] = useState({
+  const dispatch = useDispatch();
+  const [userData, setUserData] = useState({
     email: '',
     password: '',
   });
+  const [show, setShow] = useState(false);
 
   const handleChange = ({ target: { name, value } }) => {
-    setLogin(prevState => ({ ...prevState, [name]: value }));
+    setUserData(prevState => ({ ...prevState, [name]: value }));
   };
 
+  const sendUserForm = e => {
+    console.log(userData);
+    e.preventDefault();
+    dispatch(login(userData));
+    setUserData({
+      email: '',
+      password: '',
+    });
+  };
+  const onClickShow = () => setShow(!show);
   return (
     <>
       <form>
@@ -17,20 +31,25 @@ export const Login = () => {
         <input
           name="email"
           placeholder="Email"
-          value={login.email}
+          value={userData.email}
           type="email"
           onChange={handleChange}
           required
         ></input>
         <input
           name="password"
-          value={login.password}
+          value={userData.password}
           onChange={handleChange}
           required
           placeholder="Password"
-          type="password"
+          type={show ? 'text' : 'password'}
         ></input>
-        <button type="button">Log in</button>
+        <button type="button" onClick={onClickShow}>
+          {show ? 'Hide' : 'Show'}{' '}
+        </button>
+        <button type="button" onClick={sendUserForm}>
+          Log in
+        </button>
       </form>
     </>
   );

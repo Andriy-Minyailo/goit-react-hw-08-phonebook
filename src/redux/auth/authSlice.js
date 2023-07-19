@@ -1,74 +1,47 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { register, login, logout, refreshCurrentUser } from './operetionsAuth';
+import { register, login, logout, refreshCurrentUser } from './operationsAuth';
 
-// const handlePending = state => {
-//   state.contacts.isLoading = true;
-// };
-// const handleRejected = (state, action) => {
-//   state.contacts.isLoading = false;
-//   state.contacts.error = action.payload;
-// };
+const initialState = {
+  user: { name: null, email: null },
+  token: null,
+  isLoggedIn: false,
+  isRefreshing: false,
+};
 
-// const initialUser = {
-//   name: '',
-//   email: '',
-//   password: '',
-//   isLoading: false,
-//   error: null,
-// };
+const authSlice = createSlice({
+  name: 'auth',
+  initialState,
+  extraReducers: {
+    [register.fulfilled](state, action) {
+      state.user.name = action.payload.user.name;
+      state.token = action.payload.token;
+      state.isLoggedIn = true;
+    },
 
-// export const contactsList = createSlice({
-//   name: 'user',
-//   initialState: {
-//     contacts: {
-//       items: [],
-//       isLoading: false,
-//       error: null,
-//     },
-//     filter: '',
-//   },
-//   reducers: {
-//     filterValue: {
-//       reducer(state, { payload }) {
-//         state.filter = payload;
-//       },
-//       prepare(query) {
-//         return {
-//           payload: query,
-//         };
-//       },
-//     },
-//   },
+    [login.fulfilled](state, action) {
+      state.user.name = action.payload.user.name;
+      state.token = action.payload.token;
+      state.isLoggedIn = true;
+    },
 
-//   extraReducers: {
-//     [fetchContacts.pending]: handlePending,
-//     [fetchContacts.fulfilled](state, action) {
-//       state.contacts.isLoading = false;
-//       state.contacts.error = null;
-//       state.contacts.items = action.payload;
-//     },
-//     [fetchContacts.rejected]: handleRejected,
+    [logout.fulfilled](state) {
+      state.user = { name: null, email: null };
+      state.token = null;
+      state.isLoggedIn = false;
+    },
 
-//     [addContact.pending]: handlePending,
-//     [addContact.fulfilled](state, action) {
-//       state.contacts.isLoading = false;
-//       state.contacts.error = null;
-//       state.contacts.items.push(action.payload);
-//     },
-//     [addContact.rejected]: handleRejected,
+    [refreshCurrentUser.fulfilled](state, action) {
+      state.user = action.payload;
+      state.isLoggedIn = true;
+      state.isRefreshing = false;
+    },
+    [refreshCurrentUser.rejected](state) {
+      state.isRefreshing = false;
+    },
+    [refreshCurrentUser.pending](state) {
+      state.isRefreshing = true;
+    },
+  },
+});
 
-//     [deleteContact.pending]: handlePending,
-//     [deleteContact.fulfilled](state, action) {
-//       state.contacts.isLoading = false;
-//       state.contacts.error = null;
-//       const index = state.contacts.items.findIndex(
-//         task => task.id === action.payload.id
-//       );
-//       state.contacts.items.splice(index, 1);
-//     },
-//     [deleteContact.rejected]: handleRejected,
-//   },
-// });
-
-// export const { filterValue } = contactsList.actions;
-// export const contactsReducer = contactsList.reducer;
+export const authReducer = authSlice.reducer;
