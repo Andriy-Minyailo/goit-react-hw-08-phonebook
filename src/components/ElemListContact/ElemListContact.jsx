@@ -34,7 +34,9 @@ export const ElemListContact = ({ name, number, id }) => {
           Delete
         </button>
       </li>
-      {showModal && <EditForm onClose={() => setShowModal(false)} />}
+      {showModal && (
+        <EditForm onClose={() => setShowModal(false)} showModal={showModal} />
+      )}
     </>
   );
 };
