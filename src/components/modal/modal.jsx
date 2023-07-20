@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchContacts, updateContact } from 'redux/operations';
+import { updateContact } from 'redux/operations';
 import { getToUpdate } from 'redux/selectors';
 import { createPortal } from 'react-dom';
 const rootModalRef = document.querySelector('#modal');
@@ -21,7 +21,7 @@ export const EditForm = ({ onClose }) => {
         number: numberCurrent,
       })
     );
-    // dispatch(fetchContacts());
+
     onClose();
   };
   return createPortal(

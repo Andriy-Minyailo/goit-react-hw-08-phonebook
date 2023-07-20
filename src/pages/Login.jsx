@@ -26,7 +26,7 @@ export const Login = () => {
   const onClickShow = () => setShow(!show);
   return (
     <>
-      <form>
+      <form onSubmit={sendUserForm}>
         <h2>Log In</h2>
         <input
           name="email"
@@ -47,9 +47,7 @@ export const Login = () => {
         <button type="button" onClick={onClickShow}>
           {show ? 'Hide' : 'Show'}{' '}
         </button>
-        <button type="button" onClick={sendUserForm}>
-          Log in
-        </button>
+        <button type="submit">Log in</button>
       </form>
     </>
   );

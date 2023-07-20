@@ -29,7 +29,7 @@ export const RegisterUser = () => {
   const onClickShow = () => setShow(!show);
   return (
     <>
-      <form>
+      <form onSubmit={sendRegisterForm}>
         <h2>Register</h2>
         <input
           name="name"
@@ -61,9 +61,7 @@ export const RegisterUser = () => {
         <button type="button" onClick={onClickShow}>
           {show ? 'Hide' : 'Show'}{' '}
         </button>
-        <button type="button" onClick={sendRegisterForm}>
-          Register
-        </button>
+        <button type="submit">Register</button>
       </form>
     </>
   );
