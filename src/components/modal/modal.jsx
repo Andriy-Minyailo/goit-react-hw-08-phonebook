@@ -6,13 +6,8 @@ import { createPortal } from 'react-dom';
 import {
   Input,
   InputGroup,
-  InputRightElement,
-  VStack,
   Button,
-  Divider,
   Center,
-  Box,
-  useToast,
   Modal,
   ModalOverlay,
   ModalContent,
@@ -47,7 +42,9 @@ export const EditForm = ({ onClose, showModal }) => {
     <Modal isOpen={showModal} onClose={onClose}>
       <ModalOverlay />
       <ModalContent>
-        <ModalHeader>Modal Title</ModalHeader>
+        <Center>
+          <ModalHeader>Contact</ModalHeader>
+        </Center>
         <ModalCloseButton />
         <ModalBody>
           <InputGroup>
@@ -59,6 +56,7 @@ export const EditForm = ({ onClose, showModal }) => {
               pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
               title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
               required
+              mb={2}
             />
           </InputGroup>
           <InputGroup>
@@ -74,11 +72,15 @@ export const EditForm = ({ onClose, showModal }) => {
             />
           </InputGroup>
         </ModalBody>
-        <ModalFooter>
-          <Button type="submit" onClick={handleEditForm}>
+        <ModalFooter
+          display="flex"
+          alignItems="center"
+          justifyContent="space-around"
+        >
+          <Button type="submit" onClick={handleEditForm} colorScheme="blue">
             Update
           </Button>
-          <Button type="button" onClick={onClose}>
+          <Button type="button" onClick={onClose} colorScheme="blue">
             Cancel
           </Button>
         </ModalFooter>

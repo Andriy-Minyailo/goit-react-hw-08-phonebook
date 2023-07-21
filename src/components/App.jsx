@@ -13,6 +13,8 @@ import { useEffect } from 'react';
 import { refreshCurrentUser } from 'redux/auth/operationsAuth';
 import { RestrictedRoute } from './Routes/PuplicRoute';
 import { PrivatRoute } from './Routes/PrivateRoute';
+import { Footer } from './Footer/Footer';
+import { Box, Flex } from '@chakra-ui/react';
 
 export const App = () => {
   const dispatch = useDispatch();
@@ -22,36 +24,38 @@ export const App = () => {
   }, [dispatch]);
 
   return (
-    <div className={css.container}>
-      <Header />
-      <Routes>
-        <Route path="/" index element={<Home />} />
-        <Route
-          path="/login"
-          element={
-            <RestrictedRoute redirectTo="/contacts" component={<Login />} />
-          }
-        />
-        <Route
-          path="/register"
-          element={
-            <RestrictedRoute
-              redirectTo="/contacts"
-              component={<RegisterUser />}
-            />
-          }
-        />
-        <Route
-          path="/contacts"
-          element={<PrivatRoute redirectTo="/login" component={<Contacts />} />}
-        />
-        <Route path="*" element={<Home />} />
-      </Routes>
-      {/* <h2>Phonebook</h2>
-      <FormAddContacts />
-      <h2>Contacts</h2>
-      <Filter />
-      <ListContacts /> */}
-    </div>
+    <Flex minHeight="100vh" direction="column" className={css.container}>
+      <Box as="main" flexGrow="1">
+        <Header />
+        <Routes>
+          <Route path="/" index element={<Home />} />
+          <Route
+            path="/login"
+            element={
+              <RestrictedRoute redirectTo="/contacts" component={<Login />} />
+            }
+          />
+          <Route
+            path="/register"
+            element={
+              <RestrictedRoute
+                redirectTo="/contacts"
+                component={<RegisterUser />}
+              />
+            }
+          />
+          <Route
+            path="/contacts"
+            element={
+              <PrivatRoute redirectTo="/login" component={<Contacts />} />
+            }
+          />
+          <Route path="*" element={<Home />} />
+        </Routes>
+      </Box>
+      <Box as="footer" h={10} bg="var(--chakra-colors-blue-500)" mt={10}>
+        <Footer />
+      </Box>
+    </Flex>
   );
 };

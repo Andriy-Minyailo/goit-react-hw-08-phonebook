@@ -1,12 +1,13 @@
 .list {
   display: flex;
   justify-content: space-between;
-  width: 500px;
+  align-items: center;
+  width: 538px;
   &:not(:last-child) {
-    margin-bottom: 15px;
+    margin-bottom: 10px;
   }
 }
-.btn {
+/* .btn {
   padding: 5px;
   border-radius: 5px;
   cursor: pointer;
@@ -14,4 +15,4 @@
   &:hover {
     background-color: rgb(145, 145, 247);
   }
-}
+} */
